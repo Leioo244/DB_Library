@@ -19,5 +19,8 @@ Reporting tools for library analytics.
 ### (Getting Started)
 To explore the project, start by cloning the repository to your local machine or downloading the provided documentation and system design files.
 
-For further inquiries or contributions to the project, please reach out through the Issues tab or submit a pull request.
+
+### Note on Data Privacy:
+
+Please be aware that any personal information contained within this project's database is  Not real, No real personal data is used and any resemblance to actual personal information is purely coincidental. This project is intended to demonstrate a prototype of how the library's database system could function and is not connected to any real-world data systems.
 
