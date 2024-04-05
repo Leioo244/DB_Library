@@ -1,0 +1,12 @@
+insert into Publisher values(1,'The Natural History Museum','London','Cromwell Road','+44 (0)207 942 5336',Null);
+insert into Publisher values(2,'The History Press','Cheltenham','97 St George’s Place','+'44 (0)1242 895310','web@thehistorypress.co.uk' );
+insert into publisher values(3,'HarperCollins','Glasgow','Westerhill Road Bishopbriggs',' 01484 668148',' international.schools@harpercollins.co.uk ');
+insert into publisher values(4,'Modern Language Association of America','New York','85 Broad Street','646 576-5000',Null);
+insert into publisher values(5,'Finnish Literature Society','Helsinki','Hallituskatu 1','+358 201 131 231','sks@finlit.fi');
+insert into publisher values(6,'Center for the Scientific Study of Religion','New York','One Liberty Plaza','(888)-388-3574',Null);
+insert into publisher values(7,'Studia editoria e comunicazione a Catania','Rome','Via Vicenza','3922505044','info@accademiaeditorie.it');
+insert into publisher values(8,'Detroit Institute of Arts','Detroit','Woodward Avenue','(313) 833-7900',Null);
+insert into publisher values(9,'King Saud University Press Computer faculty department','Riyadh','Shaikh Hasan Ibn Abdullah AlShaikh','96614676176','acksupress@ksu.edu.sa');
+insert into publisher values(10,'INSIDE WASHINGTON PUBLISHERS','Arlington','South Eads Street','1-800-424-9068','custsvc@iwpnews.com');
+insert into publisher values(11,'Arab Studies Institute','Beirut','Hamade Street','703-688-2745','info@arabstudiesinstitute.org');
+insert into publisher values(12,'Library of Tibetan Works and Archives Gangchen Kyishong','India','Dharamsala','+91 9218422467','ltwa1970@gmail.com');

@@ -1,0 +1,12 @@
+insert into Author('C',423,'Clarence','Barnhart');  
+insert into Author('J',561,'Joan','Biella');
+insert into Author('V',091,'Victor','Cheste');
+insert into Author('S',016,'John','Bromely');
+insert into Author('A',943,'Arthur','Reton');
+insert into Author('K',070,'Karl','Arndt');
+insert into Author('R',726,'Richard','Doris');
+insert into Author('O',017,'Oakley','Kenneth');
+insert into Author('A',100,'Ahlam','Abdulghani');
+insert into Author('J',005,'Jefrey','Barlough');
+insert into Author('T',003,'Taghreed','Alofaisan');
+insert into Author('M',404,'Micheal','Ryan');

@@ -1,0 +1,116 @@
+SQL>  create table subject (s_id number(10),s_title varchar2(30),constraint pk_sub primary key(s_id) );
+
+Table created.
+
+SQL> create table classification (clf_num number(10),clf_name varchar2(30),constraint pk_clf primary key(clf_num) );
+
+Table created.
+
+SQL> create table author (Author_FLetter varchar2(30),Cutter_num number(10),F_name varchar2(30),l_name varchar2(30),constraint pk_author primary key(Author_FLetter ,Cutter_num ) );
+
+Table created.
+
+SQL> create table Publisher(Pub_ID number(10),Pub_Name varchar2(30),pub_city varchar2(30), pub_street varchar2(30), pub_tel number(10),pub_email varchar2(30), constraint pk_pub primary key (pub_id));
+
+Table created.
+
+SQL> create table branch (br_id number(10),address varchar2(30),constraint pk_br primary key(br_id) );
+
+Table created.
+
+SQL>  create table Borrowing_rules(rules_ID number(10),max_books number(10),max_days number(10), constraint pk_rules primary key (rules_id));
+
+Table created.
+
+SQL> create table Training_Place(place_ID number(10),capacity number(10),build_num number(10),floor_num number(10),class_num number(10), constraint pk_tp primary key (place_id));
+
+Table created.
+
+SQL>  create table instructor(inst_ID number(10),inst_fname varchar2(30),inst_lname varchar2(30),inst_email varchar(30),inst_phone number(15), constraint pk_inst primary key (inst_id));
+
+Table created.
+
+SQL> create table borrowing_service (Borrow_ID number (10),no_Books number(10),Actual_RDate Date ,Borrow_Date Date,constraint pk_borrowService primary key(Borrow_ID));
+
+Table created.
+
+SQL> create table study_room(no_Room number(10),constraint pk_studRoom primary key(no_Room));
+
+Table created.
+
+SQL> create table call_number(callno_id number(10), clf_no number(10), sub_id number(10), author_fletter varchar2(30), cutter_no number(10),constraint pk_callnum primary key(callno_id,clf_no,sub_id,author_fletter,cutter_no),constraint fk_clfno foreign key (clf_no) REFERENCES classification(clf_num),constraint fk_subid foreign key (sub_id) REFERENCES subject(s_id),constraint fk_auth foreign key (author_fletter,cutter_no) REFERENCES author(Author_FLetter,cutter_num));
+
+Table created.
+
+--------------------------
+
+
+
+SQL> create table book
+  2  (ISBN number(30), b_title varchar2(40), edition varchar2(40), no_page number(10), total_copies number(10), callNo_ID number(10),
+  3  clfNo number (10), subID number(10), ath_F varchar2(30), cutterNo number(10), pub_ID number(10),
+  4  constraint pk_book primary key(ISBN),
+  5  constraint fk_book_pub foreign key(pub_ID) references publisher(pub_ID),
+  6  constraint fk_book_callNo foreign key(callNo_ID, clfNo, subID, ath_F, cutterNo) references call_number(callNo_ID, clf_no, sub_id, author_fletter, cutter_no));
+
+Table created.
+
+SQL> create table copy_id(
+  2  ISBN number(30), copyNO number(30), constraint pk_copy primary key(ISBN, copyNO), constraint fk_copyisbn foreign key (isbn) references book(ISBN));
+
+Table created.
+
+SQL> create table member(
+  2  nationalid number(30), Mfname varchar2(30), Mlname varchar2(30), Mphone number(15), rulesID number(10),constraint pk_member primary key (nationalid), constraint fk_member foreign key (rulesID) references borrowing_rules(rules_id));
+
+Table created.
+
+SQL> create table student(
+  2  Snational_id number(30),
+  3  student_id number(30), degree varchar2(20), constraint pk_student primary key (Snational_id), constraint fk_student foreign key (Snational_id) references member(nationalid));
+
+Table created.
+
+
+SQL> create table staff(SFnational_id number(30), staffid number(30) , position varchar2(20), constraint pk_staff primary key (SFnational_id), constraint fk_staff foreign key (SFnational_id) references member(nationalid));
+
+Table created.
+
+SQL> create table training_course (course_id number(30) , title varchar2(40), start_date date, end_date date, start_hour varchar2(10), end_hour varchar2(10), place_id number(30) , constraint pk_trainc primary key (course_id), constraint fk_trainc foreign key (place_id) references training_place(place_ID));
+
+Table created.
+
+SQL> create table written_by( w_isbn number(30), w_cutternum number(10), w_authorf varchar2(30), constraint pk_written primary key (w_isbn, w_cutternum, w_authorf), constraint fk_writtenisbn foreign key(w_isbn) references book(ISBN), constraint fk_written_author foreign key(w_cutternum, w_authorf) references author(Cutter_num, Author_FLetter));
+
+Table created.
+
+SQL> create table available_in (v_isbn number(30), v_brID number(10), constraint pk_available primary key(v_isbn, v_brID), constraint fk_visbn foreign key (v_isbn) references book(ISBN),  constraint fk_vbranch foreign key (v_brID) references branch(br_id));
+
+Table created.
+
+SQL> create table depends_on (dep_bid number(10), dep_isbn number(30),dep_copynum number(30), constraint pk_depend primary key(dep_bid, dep_isbn, dep_copynum), constraint fk_depb foreign key (dep_bid) references borrowing_service(Borrow_ID), constraint fk_depcopy foreign key (dep_isbn, dep_copynum) references copy_id(ISBN, copyNO));
+
+Table created.
+
+SQL> create table join(j_nid number(30), j_cid number(30), constraint pk_join primary key(j_nid, j_cid), constraint fk_joinmember foreign key (j_nid) references member(nationalid),  constraint fk_joincourse foreign key (j_cid) references training_course(course_id));
+
+Table created.
+
+SQL>  create table presented_by(pre_cid number(30), pre_instid number(30), constraint pk_presented primary key(pre_cid, pre_instid), constraint fk_precourse foreign key (pre_cid) references training_course(course_id), constraint fk_preinst foreign key (pre_instid) references instructor(inst_ID));
+
+Table created.
+
+SQL>  create table booked_by(b_roomnum number(10), b_nationalid number(30),b_date date, b_hour varchar2(10), constraint pk_booked primary key(b_roomnum, b_nationalid), constraint fk_bookedr foreign key (b_roomnum) references study_room(no_Room), constraint fk_bookedm foreign key (b_nationalid) references member(nationalid));
+
+Table created.
+
+
+SQL> create table offered_to(
+  2  off_bid number(10), off_nationalid number(30),
+  3  constraint pk_offered primary key(off_bid, off_nationalid),
+  4  constraint fk_offb foreign key (off_bid) references borrowing_service(Borrow_ID),
+  5  constraint fk_offn foreign key (off_nationalid) references member(nationalid));
+
+Table created.
+
+
